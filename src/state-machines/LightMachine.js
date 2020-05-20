@@ -2,20 +2,14 @@ import { createMachine, interpret } from 'xstate';
 
 const lightMachine = createMachine({
   // Your state machine blueprint here
-  id: 'toggle',
-  initial: 'red',
+  id: 'trafficLight',
+  initial: 'RedOn',
   states: {
-    red :{
-      on: {changeLight: 'green'}
-      },
-    yellow:{
-      on: {changeLight: 'red'}
-    },
-    green:{
-      on: {changeLight: 'red'}
-    }
-  }}
-);
+    RedOn : {on: {changeLight: 'GreenOn'}},
+    YellowOn: {on: {changeLight: 'RedOn'}},
+    GreenOn: {on: {changeLight: 'YellowOn'}}
+  }
+});
 
 
 const service = interpret(lightMachine);
